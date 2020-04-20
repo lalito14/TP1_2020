@@ -99,6 +99,16 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         txtDomicilio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
 
         sin1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         sin1.setText("Fiebre");
@@ -148,6 +158,11 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
 
         btnConfirmar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
         btnAtras.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnAtras.setText("Atras");
@@ -299,6 +314,26 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        int dni = Integer.parseInt(this.txtDni.getText());
+        String nya = this.txtNyAp.getText();
+        String dom = this.txtDomicilio.getText();
+        int tel = Integer.parseInt(this.txtTelefono.getText());
+        this.presentador.agregarPesonas(dni, nya, dom, tel);
+        Menu vistaMenu = new Menu();
+        vistaMenu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+       
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        char c = evt.getKeyChar();
+        if(!Character.isDigit(c))evt.consume();
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -372,5 +407,10 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     @Override
     public void notificarError(Exception e) {
         JOptionPane.showMessageDialog(this, "Error", "Ha ocurrido un error durante el guardado de la persona", JOptionPane.ERROR_MESSAGE);
+    }
+    
+    @Override
+    public void agregarPersona(){
+        
     }
 }

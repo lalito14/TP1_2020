@@ -10,6 +10,7 @@ package presentador;
  * @author Eduardo
  */
 public interface IRegistroLlamada {
+    public void agregarPersona();
     public void notificarPersonaAgregada();
     public void notificarError(Exception e);
 }

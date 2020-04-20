@@ -30,6 +30,6 @@ public class PersistenciaPersonas {
         this.personas.add(nuevo);
     }
     public ArrayList<Persona> getPersonas(){
-        return this.getPersonas();
+        return this.personas;
     }
 }

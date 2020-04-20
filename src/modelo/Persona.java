@@ -11,18 +11,16 @@ package modelo;
  */
 public class Persona {
     private int dni;
-    private String nombre;
-    private String Apellido;
+    private String nya;
     private int telefono;
     private String domicilio;
     
     public Persona() {
     }
 
-    public Persona(int dni, String nombre, String Apellido, int telefono, String domicilio) {
+    public Persona(int dni, String nya, String domicilio, int telefono) {
         this.dni = dni;
-        this.nombre = nombre;
-        this.Apellido = Apellido;
+        this.nya = nya;
         this.telefono = telefono;
         this.domicilio = domicilio;
     }
@@ -31,20 +29,12 @@ public class Persona {
         return dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNya() {
+        return nya;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return Apellido;
-    }
-
-    public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
+    public void setNya(String nya) {
+        this.nya = nya;
     }
 
     public int getTelefono() {
