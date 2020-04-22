@@ -33,15 +33,13 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         this.boxSintoma.addItem("Fiebre");
         this.boxSintoma.addItem("Tos seca");
         this.boxSintoma.addItem("Fatiga");
-        this.boxSintoma.addItem("Flema");
-        this.boxSintoma.addItem("Disnea");
         this.boxSintoma.addItem("Dolor muscular o articulaciones");
         this.boxSintoma.addItem("Dolor de garganta");
         this.boxSintoma.addItem("Dolor de cabeza");
         this.boxSintoma.addItem("Escalofrios");
         this.boxSintoma.addItem("Nauseas o vomitos");
         this.boxSintoma.addItem("Congestion nasal");
-        this.boxSintoma.addItem("Dificultad para respirar");
+        this.boxSintoma.addItem("Dificultad para respirar");        
         this.labelGravedad.setText("0");
         this.presentador.mostrarSintomas(0);
         this.setVisible(true);
@@ -260,7 +258,7 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
                             .addComponent(jLabel6)
                             .addComponent(labelGravedad))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnConfirmar)
                     .addComponent(btnAtras))
                 .addContainerGap())
@@ -395,7 +393,7 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     @Override
     public void mostrarSintomas(ArrayList<Sintoma> sintoma, int lvl){
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Nivel");
+        modelo.addColumn("ID");
         modelo.addColumn("Sintoma");
         int i = Integer.parseInt(this.labelGravedad.getText());
         int id = 1;
