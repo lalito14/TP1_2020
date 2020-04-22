@@ -23,6 +23,6 @@ public class Sintoma {
     }
     
     public String getDescripcion(){
-        return this.descripcion;
+        return descripcion;
     }
 }

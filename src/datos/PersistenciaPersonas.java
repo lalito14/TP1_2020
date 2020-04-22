@@ -22,10 +22,6 @@ public class PersistenciaPersonas {
       personas = new ArrayList<>();
     }
     
-    public static PersistenciaPersonas getPersistenciaPersonas(){
-        return p;
-    }
-    
     public void agregarPersona(Persona nuevo) {
         this.personas.add(nuevo);
     }

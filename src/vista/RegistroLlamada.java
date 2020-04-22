@@ -5,7 +5,11 @@
  */
 package vista;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Persona;
+import modelo.Sintoma;
 import vista.Menu;
 import presentador.IRegistroLlamada;
 import presentador.PresentadorRegistroLlamada;
@@ -26,7 +30,19 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         this.presentador = new PresentadorRegistroLlamada(this);
         this.setLocationRelativeTo(null);
         this.setTitle("Registro de Llamadas");
-        
+        this.boxSintoma.addItem("Fiebre");
+        this.boxSintoma.addItem("Tos seca");
+        this.boxSintoma.addItem("Fatiga");
+        this.boxSintoma.addItem("Flema");
+        this.boxSintoma.addItem("Disnea");
+        this.boxSintoma.addItem("Dolor muscular o articulaciones");
+        this.boxSintoma.addItem("Dolor de garganta");
+        this.boxSintoma.addItem("Dolor de cabeza");
+        this.boxSintoma.addItem("Escalofrios");
+        this.boxSintoma.addItem("Nauseas o vomitos");
+        this.boxSintoma.addItem("Congestion nasal");
+        this.boxSintoma.addItem("Dificultad para respirar");
+        this.presentador.mostrarSintomas();
         this.setVisible(true);
         
     }
@@ -52,21 +68,13 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         txtNyAp = new javax.swing.JTextField();
         txtDomicilio = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
-        sin1 = new javax.swing.JCheckBox();
-        sin2 = new javax.swing.JCheckBox();
-        sin3 = new javax.swing.JCheckBox();
-        sin4 = new javax.swing.JCheckBox();
-        sin5 = new javax.swing.JCheckBox();
-        sin6 = new javax.swing.JCheckBox();
-        sin7 = new javax.swing.JCheckBox();
-        sin8 = new javax.swing.JCheckBox();
-        sin9 = new javax.swing.JCheckBox();
-        sin10 = new javax.swing.JCheckBox();
-        sin11 = new javax.swing.JCheckBox();
-        sin12 = new javax.swing.JCheckBox();
         btnConfirmar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        btnSalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaSintomas = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        boxSintoma = new javax.swing.JComboBox<>();
+        botAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,52 +118,6 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             }
         });
 
-        sin1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin1.setText("Fiebre");
-
-        sin2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin2.setText("Tos Seca");
-
-        sin3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin3.setText("Fatiga");
-
-        sin4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin4.setText("Flema");
-        sin4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sin4ActionPerformed(evt);
-            }
-        });
-
-        sin5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin5.setText("Escalofrios");
-
-        sin6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin6.setText("Congestion Nasal");
-
-        sin7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin7.setText("Dificultad P/ Respirar");
-
-        sin8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin8.setText("Disnea");
-        sin8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sin8ActionPerformed(evt);
-            }
-        });
-
-        sin9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin9.setText("Dolor Muscular o de articulaciones");
-
-        sin10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin10.setText("Dolor de garganta");
-
-        sin11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin11.setText("Dolor de cabeza");
-
-        sin12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        sin12.setText("Nauseas o Vomito");
-
         btnConfirmar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,11 +134,43 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             }
         });
 
-        btnSalir.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+        tablaSintomas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null}
+            },
+            new String [] {
+                "null", "Title 1"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaSintomas);
+
+        jLabel5.setText("Sintoma:");
+
+        boxSintoma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
+                boxSintomaActionPerformed(evt);
+            }
+        });
+
+        botAgregar.setText("Agregar");
+        botAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botAgregarActionPerformed(evt);
             }
         });
 
@@ -185,51 +179,42 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnConfirmar)
-                .addGap(33, 33, 33)
-                .addComponent(btnSalir)
-                .addGap(41, 41, 41))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtNyAp))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNyAp, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(boxSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(botAgregar))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(sin1)
-                                .addComponent(sin2))
-                            .addGap(58, 58, 58)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(sin6)
-                                .addComponent(sin5)
-                                .addComponent(sin7)
-                                .addComponent(sin8)))
-                        .addComponent(btnAtras, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(sin3)
-                    .addComponent(sin4))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sin10)
-                    .addComponent(sin11)
-                    .addComponent(sin9)
-                    .addComponent(sin12))
-                .addContainerGap(25, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(182, 182, 182))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnConfirmar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addComponent(btnAtras))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,36 +235,20 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sin1)
-                    .addComponent(sin5)
-                    .addComponent(sin9))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sin2)
-                    .addComponent(sin6)
-                    .addComponent(sin10))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sin3)
-                    .addComponent(sin7)
-                    .addComponent(sin11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(sin4)
-                            .addComponent(sin8)
-                            .addComponent(sin12))
-                        .addContainerGap(65, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnConfirmar)
-                            .addComponent(btnSalir)
-                            .addComponent(btnAtras))
-                        .addContainerGap())))
+                            .addComponent(jLabel5)
+                            .addComponent(boxSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(botAgregar)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfirmar)
+                    .addComponent(btnAtras))
+                .addContainerGap())
         );
 
         pack();
@@ -300,29 +269,20 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         if(!Character.isDigit(c))evt.consume();
     }//GEN-LAST:event_txtDniKeyTyped
 
-    private void sin4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sin4ActionPerformed
-        JOptionPane.showMessageDialog(this, "No se asigno nivel para este sintoma", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        sin4.setSelected(false);
-    }//GEN-LAST:event_sin4ActionPerformed
-
-    private void sin8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sin8ActionPerformed
-        JOptionPane.showMessageDialog(this, "No se asigno nivel para este sintoma", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-        sin8.setSelected(false);
-    }//GEN-LAST:event_sin8ActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_btnSalirActionPerformed
-
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        int dni = Integer.parseInt(this.txtDni.getText());
-        String nya = this.txtNyAp.getText();
-        String dom = this.txtDomicilio.getText();
-        int tel = Integer.parseInt(this.txtTelefono.getText());
-        this.presentador.agregarPesonas(dni, nya, dom, tel);
-        Menu vistaMenu = new Menu();
-        vistaMenu.setVisible(true);
-        dispose();
+        try{
+            int dni = Integer.parseInt(this.txtDni.getText());
+            String nya = this.txtNyAp.getText();
+            String dom = this.txtDomicilio.getText();
+            int tel = Integer.parseInt(this.txtTelefono.getText());
+            this.presentador.agregarPesonas(dni, nya, dom, tel);
+            Menu vistaMenu = new Menu();
+            vistaMenu.setVisible(true);
+            dispose();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Por favor, llene los campos correctamente");
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
@@ -333,6 +293,14 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         char c = evt.getKeyChar();
         if(!Character.isDigit(c))evt.consume();
     }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void boxSintomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxSintomaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxSintomaActionPerformed
+
+    private void botAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarActionPerformed
+        this.agregarSintoma();
+    }//GEN-LAST:event_botAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -370,9 +338,10 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botAgregar;
+    private javax.swing.JComboBox<String> boxSintoma;
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnSalir;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
@@ -381,18 +350,9 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JCheckBox sin1;
-    private javax.swing.JCheckBox sin10;
-    private javax.swing.JCheckBox sin11;
-    private javax.swing.JCheckBox sin12;
-    private javax.swing.JCheckBox sin2;
-    private javax.swing.JCheckBox sin3;
-    private javax.swing.JCheckBox sin4;
-    private javax.swing.JCheckBox sin5;
-    private javax.swing.JCheckBox sin6;
-    private javax.swing.JCheckBox sin7;
-    private javax.swing.JCheckBox sin8;
-    private javax.swing.JCheckBox sin9;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaSintomas;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
     private javax.swing.JTextField txtNyAp;
@@ -413,4 +373,27 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     public void agregarPersona(){
         
     }
+    
+    @Override
+    public void mostrarSintomas(ArrayList<Sintoma> sintoma){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("id");
+        modelo.addColumn("Sintoma");
+        for(Sintoma s : sintoma){
+            Object fila[]={
+                1,
+                s.getDescripcion()
+            };
+            modelo.addRow(fila);
+        };
+        this.tablaSintomas.setModel(modelo);
+    }
+    
+    @Override
+    public void agregarSintoma(){
+        String sin = this.boxSintoma.getSelectedItem().toString();
+        presentador.agregarSintoma(sin);
+    }
+    
+    
 }

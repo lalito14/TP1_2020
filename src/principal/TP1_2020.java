@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package principal;
-
+import datos.PersistenciaSintomas;
+import modelo.Sintoma;
 import vista.Menu;
 
 /**
@@ -18,6 +19,7 @@ public class TP1_2020 {
      */
     public static void main(String[] args) {
         Menu vista = new Menu();
+        
     }
     
 }
