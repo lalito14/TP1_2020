@@ -10,22 +10,23 @@ package modelo;
  * @author Eduardo
  */
 public abstract class Recurso {
-    private boolean estado;
-
-    public Recurso(){
+    private Estados estado;
+    
+    public Recurso(){     
         
     }
-    public Recurso(boolean estado) {
+    
+    public Recurso(Estados estado) {
         this.estado = estado;
     }
 
-    public boolean getEstado() {
+    public Estados getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(Estados estado) {
         this.estado = estado;
     }
     
-    
+   
 }

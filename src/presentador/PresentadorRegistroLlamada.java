@@ -8,6 +8,7 @@ package presentador;
 import java.util.ArrayList;
 import modelo.Persona;
 import datos.PersistenciaPersonas;
+import datos.PersistenciaRecursos;
 import datos.PersistenciaSintomas;
 import javax.swing.JOptionPane;
 import modelo.Sintoma;
@@ -21,6 +22,7 @@ public class PresentadorRegistroLlamada {
     private IRegistroLlamada vista;
     private PersistenciaPersonas perper;
     private PersistenciaSintomas persin;
+    private PersistenciaRecursos perrec;
     
     public PresentadorRegistroLlamada(IRegistroLlamada vista){
         this.vista = vista;
@@ -67,4 +69,6 @@ public class PresentadorRegistroLlamada {
     public void mostrarSintomas(int lvl){
         vista.mostrarSintomas(persin.getSintomas(), lvl);
     }
+    
+    
 }

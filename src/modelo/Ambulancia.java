@@ -24,4 +24,11 @@ public class Ambulancia extends Recurso{
     public int getId(){
         return this.id;
     }
+
+    public Ambulancia(int id, Estados estado) {
+        super(estado);
+        this.id = id;
+    }
+    
+    
 }

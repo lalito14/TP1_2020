@@ -37,4 +37,12 @@ public class Medico extends Recurso{
     public String getInterno(){
         return this.interno;
     }
+
+    public Medico(String nombre, String interno, Estados estado) {
+        super(estado);
+        this.nombre = nombre;
+        this.interno = interno;
+    }
+    
+    
 }

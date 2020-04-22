@@ -36,6 +36,12 @@ public class Turno extends Recurso{
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+
+    public Turno(String fechaHora, int telefono, Estados estado) {
+        super(estado);
+        this.fechaHora = fechaHora;
+        this.telefono = telefono;
+    }
     
     
 }

@@ -75,8 +75,32 @@ public class Listado extends javax.swing.JFrame implements IListado{
             new String [] {
                 "Fecha y Hora", "DNI", "Apellido", "Nombre", "Telefono", "Nivel", "Cant. Sintomas", "Recurso"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaPersonas.getTableHeader().setReorderingAllowed(false);
+        tablaPersonas.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                tablaPersonasComponentAdded(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaPersonas);
+        if (tablaPersonas.getColumnModel().getColumnCount() > 0) {
+            tablaPersonas.getColumnModel().getColumn(0).setResizable(false);
+            tablaPersonas.getColumnModel().getColumn(1).setResizable(false);
+            tablaPersonas.getColumnModel().getColumn(2).setResizable(false);
+            tablaPersonas.getColumnModel().getColumn(3).setResizable(false);
+            tablaPersonas.getColumnModel().getColumn(4).setResizable(false);
+            tablaPersonas.getColumnModel().getColumn(5).setResizable(false);
+            tablaPersonas.getColumnModel().getColumn(6).setResizable(false);
+            tablaPersonas.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Listado de atencion");
@@ -251,6 +275,10 @@ public class Listado extends javax.swing.JFrame implements IListado{
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void tablaPersonasComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tablaPersonasComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaPersonasComponentAdded
+
     /**
      * @param args the command line arguments
      */
@@ -313,21 +341,22 @@ public class Listado extends javax.swing.JFrame implements IListado{
     public void mostrarDatosPersonas(ArrayList<Persona> personas) {
         DefaultTableModel modelo = new DefaultTableModel();
         /*Definimos las columnas*/
-//        modelo.addColumn("Fecha y Hora");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido y Nombre");
         modelo.addColumn("Domicilio");
         modelo.addColumn("Telefono");
-//        modelo.addColumn("Nivel");
-//        modelo.addColumn("Cant. Sintomas");
-//        modelo.addColumn("Recurso");
+        modelo.addColumn("Nivel");
+        modelo.addColumn("Cant. Sintomas");
+        modelo.addColumn("Recurso");
         /*Definimos las filas*/
         for(Persona p : personas){
             Object fila[]={
               p.getDni(),
               p.getNya(),
               p.getDomicilio(),
-              p.getTelefono()
+              p.getTelefono(),
+              p.getLvl()
+              
             };
             modelo.addRow(fila);
         };
