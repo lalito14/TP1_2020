@@ -42,7 +42,8 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         this.boxSintoma.addItem("Nauseas o vomitos");
         this.boxSintoma.addItem("Congestion nasal");
         this.boxSintoma.addItem("Dificultad para respirar");
-        this.presentador.mostrarSintomas();
+        this.labelGravedad.setText("0");
+        this.presentador.mostrarSintomas(0);
         this.setVisible(true);
         
     }
@@ -75,6 +76,8 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         jLabel5 = new javax.swing.JLabel();
         boxSintoma = new javax.swing.JComboBox<>();
         botAgregar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        labelGravedad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +177,10 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             }
         });
 
+        jLabel6.setText("NIVEL DE GRAVEDAD:");
+
+        labelGravedad.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,7 +203,11 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(boxSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(botAgregar))
+                                .addComponent(botAgregar)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(labelGravedad)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
@@ -240,10 +251,14 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(boxSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addComponent(botAgregar)))
+                            .addComponent(boxSintoma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(29, 29, 29)
+                        .addComponent(botAgregar)
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(labelGravedad))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfirmar)
@@ -351,7 +366,9 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelGravedad;
     private javax.swing.JTable tablaSintomas;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtDomicilio;
@@ -375,13 +392,18 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     }
     
     @Override
-    public void mostrarSintomas(ArrayList<Sintoma> sintoma){
+    public void mostrarSintomas(ArrayList<Sintoma> sintoma, int lvl){
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("id");
+        modelo.addColumn("Nivel");
         modelo.addColumn("Sintoma");
+        int i = Integer.parseInt(this.labelGravedad.getText());
+        int id = 1;
+        if (i <= lvl){
+            this.labelGravedad.setText(Integer.toString(lvl));
+        }
         for(Sintoma s : sintoma){
             Object fila[]={
-                1,
+                id ++,
                 s.getDescripcion()
             };
             modelo.addRow(fila);
