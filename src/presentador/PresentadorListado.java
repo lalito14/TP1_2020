@@ -9,7 +9,7 @@ public class PresentadorListado {
     private PersistenciaPersonas persistencia;
     public PresentadorListado(IListado vista){
         this.vista = vista;
-        this.persistencia = new PersistenciaPersonas();
+        this.persistencia = PersistenciaPersonas.obtenerPersistencia();
     }
    
     public void mostrarDatosPersonas(){

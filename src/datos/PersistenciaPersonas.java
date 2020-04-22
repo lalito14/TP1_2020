@@ -13,19 +13,28 @@ import modelo.Persona;
  *
  * @author Eduardo
  */
-public class PersistenciaPersonas {
-    private ArrayList<Persona> personas; //almacena personas en memoria en tiempo de ejecucion
-    
-    private static PersistenciaPersonas p = new PersistenciaPersonas();
+public class PersistenciaPersonas implements IAccesoPersonas{
+    private  ArrayList<Persona> personas;
 
-    public PersistenciaPersonas(){
-      personas = new ArrayList<>();
-    }
+    private static PersistenciaPersonas persistencia = new PersistenciaPersonas();
     
+    
+    public PersistenciaPersonas (){
+        personas = new ArrayList<>();
+    }
+    public static PersistenciaPersonas obtenerPersistencia(){
+        return persistencia;
+    }
+
+    @Override
     public void agregarPersona(Persona nuevo) {
         this.personas.add(nuevo);
     }
-    public ArrayList<Persona> getPersonas(){
+
+    @Override
+    public ArrayList<Persona> getPersonas() {
         return this.personas;
     }
+
+    
 }

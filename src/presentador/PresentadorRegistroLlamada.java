@@ -26,7 +26,7 @@ public class PresentadorRegistroLlamada {
     
     public PresentadorRegistroLlamada(IRegistroLlamada vista){
         this.vista = vista;
-        this.perper = new PersistenciaPersonas();
+        this.perper = PersistenciaPersonas.obtenerPersistencia();
         this.persin = new PersistenciaSintomas();
     }
     
