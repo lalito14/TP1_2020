@@ -14,15 +14,17 @@ public class Persona {
     private String nya;
     private int telefono;
     private String domicilio;
+    private int lvl;
     
     public Persona() {
     }
 
-    public Persona(int dni, String nya, String domicilio, int telefono) {
+    public Persona(int dni, String nya, String domicilio, int telefono, int lvl) {
         this.dni = dni;
         this.nya = nya;
         this.telefono = telefono;
         this.domicilio = domicilio;
+        this.lvl = lvl;
     }
 
     public int getDni() {
@@ -51,6 +53,14 @@ public class Persona {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+    public int getLvl() {
+        return lvl;
+    }
+
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
     }
     
     

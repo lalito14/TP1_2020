@@ -16,6 +16,6 @@ public interface IRegistroLlamada {
     public void agregarPersona();
     public void notificarPersonaAgregada();
     public void notificarError(Exception e);
-    public void mostrarSintomas(ArrayList<Sintoma> sintoma);
+    public void mostrarSintomas(ArrayList<Sintoma> sintoma, int lvl);
     public void agregarSintoma();
 }

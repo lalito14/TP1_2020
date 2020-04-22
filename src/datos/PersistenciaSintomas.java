@@ -6,6 +6,7 @@
 package datos;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.Sintoma;
 
 /**
@@ -20,9 +21,24 @@ public class PersistenciaSintomas {
     }
     
     public void agregarSintoma(Sintoma nuevo){
-        this.sintoma.add(nuevo);
+        int a = 0;
+        for(Sintoma s : sintoma){
+            if(s.getDescripcion() == nuevo.getDescripcion()){
+                a = 1;
+            }
+        }
+        if(a == 0){
+            this.sintoma.add(nuevo);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El sintoma ya fue agregado anteriormente");
+        }
     }
     public ArrayList<Sintoma> getSintomas(){
         return this.sintoma;
+    }
+    public int cantidadSintomas(){
+        int cant = sintoma.size();
+        return cant;
     }
 }

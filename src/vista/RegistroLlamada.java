@@ -290,7 +290,8 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             String nya = this.txtNyAp.getText();
             String dom = this.txtDomicilio.getText();
             int tel = Integer.parseInt(this.txtTelefono.getText());
-            this.presentador.agregarPesonas(dni, nya, dom, tel);
+            int lvl = Integer.parseInt(this.labelGravedad.getText());
+            this.presentador.agregarPesonas(dni, nya, dom, tel, lvl);
             Menu vistaMenu = new Menu();
             vistaMenu.setVisible(true);
             dispose();

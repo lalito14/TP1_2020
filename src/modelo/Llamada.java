@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class Llamada {
     private String fechaHora;
     private Recurso recurso;
-    private Nivel nivel;
     private ArrayList<Sintoma> sintomas;
     private Persona persona;
     
@@ -22,10 +21,9 @@ public class Llamada {
         
     }
 
-    public Llamada(String fechaHora, Recurso recurso, Nivel nivel, ArrayList<Sintoma> sintomas, Persona persona) {
+    public Llamada(String fechaHora, Recurso recurso, ArrayList<Sintoma> sintomas, Persona persona) {
         this.fechaHora = fechaHora;
         this.recurso = recurso;
-        this.nivel = nivel;
         this.sintomas = sintomas;
         this.persona = persona;
     }
@@ -44,14 +42,6 @@ public class Llamada {
 
     public void setRecurso(Recurso recurso) {
         this.recurso = recurso;
-    }
-
-    public Nivel getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
     }
 
     public ArrayList<Sintoma> getSintomas() {
