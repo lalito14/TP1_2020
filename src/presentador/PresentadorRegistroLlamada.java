@@ -7,9 +7,7 @@ package presentador;
 
 import java.util.ArrayList;
 import modelo.Persona;
-import datos.PersistenciaPersonas;
-import datos.PersistenciaRecursos;
-import datos.PersistenciaSintomas;
+import datos.*;
 import javax.swing.JOptionPane;
 import modelo.Sintoma;
 
@@ -29,13 +27,25 @@ public class PresentadorRegistroLlamada {
         this.vista = vista;
         this.perper = PersistenciaPersonas.obtenerPersistencia();
         this.persin = new PersistenciaSintomas();
+        this.perrec = PersistenciaRecursos.obtenerPersistencia();
     }
     
     public void agregarPersonas(int dni, String nya, String domicilio, int telefono, int lvl, int cantsint, String recurso){
+        
         try{
             cantsint = persin.cantidadSintomas();
-            recurso = null;
             Persona np = new Persona(dni, nya, telefono, domicilio, lvl, cantsint, recurso);
+            switch(lvl){
+                case 1:
+                    for(Turno t : Turno){
+                        
+                    }
+                    break;
+                case 2: 
+                    break;
+                case 3:
+                    break;
+            }
             this.perper.agregarPersona(np);
             vista.notificarPersonaAgregada();
         }catch(Exception e){
@@ -72,8 +82,4 @@ public class PresentadorRegistroLlamada {
     public void mostrarSintomas(int lvl){
         vista.mostrarSintomas(persin.getSintomas(), lvl);
     }
-
-    
-    
-    
 }
