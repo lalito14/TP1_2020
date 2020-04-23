@@ -28,7 +28,7 @@ public class PersistenciaRecursos {
       this.agregarAmbulancia(a2);
       
       Medico = new ArrayList<>();
-      Medico m1 = new Medico("Dr. Mengeche", 6969, activo);
+      Medico m1 = new Medico("Dr. Siares", 1771, activo);
       Medico m2 = new Medico("Dr. Neme Toll", 1212, activo);
       this.agregarMedico(m1);
       this.agregarMedico(m2);
