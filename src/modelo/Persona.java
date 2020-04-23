@@ -21,14 +21,33 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(int dni, String nya, int telefono, String domicilio, int lvl) {
+    public Persona(int dni, String nya, int telefono, String domicilio, int lvl, int cantsint, String recurso) {
         this.dni = dni;
         this.nya = nya;
         this.telefono = telefono;
         this.domicilio = domicilio;
         this.lvl = lvl;
-        
+        this.cantsint = cantsint;
+        this.recurso = recurso;
     }
+
+    public int getCantsint() {
+        return cantsint;
+    }
+
+    public void setCantsint(int cantsint) {
+        this.cantsint = cantsint;
+    }
+
+    public String getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(String recurso) {
+        this.recurso = recurso;
+    }
+
+
 
     public int getDni() {
         return dni;

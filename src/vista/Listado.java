@@ -348,7 +348,9 @@ public class Listado extends javax.swing.JFrame implements IListado{
               p.getNya(),
               p.getDomicilio(),
               p.getTelefono(),
-              p.getLvl()
+              p.getLvl(),
+              p.getCantsint(),
+              p.getRecurso()
               
             };
             modelo.addRow(fila);

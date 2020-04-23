@@ -292,7 +292,7 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             int lvl = Integer.parseInt(this.labelGravedad.getText());
             int cantsint = 0;
             String recurso = null;
-            this.presentador.agregarPersonas(dni, nya, dom, tel, lvl);
+            this.presentador.agregarPersonas(dni, nya, dom, tel, lvl,cantsint, recurso);
             Menu vistaMenu = new Menu();
             vistaMenu.setVisible(true);
             dispose();
