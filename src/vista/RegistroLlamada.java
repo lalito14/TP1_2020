@@ -5,6 +5,7 @@
  */
 package vista;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -289,7 +290,9 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             String dom = this.txtDomicilio.getText();
             int tel = Integer.parseInt(this.txtTelefono.getText());
             int lvl = Integer.parseInt(this.labelGravedad.getText());
-            this.presentador.agregarPesonas(dni, nya, dom, tel, lvl);
+            int cantsint = 0;
+            String recurso = null;
+            this.presentador.agregarPersonas(dni, nya, dom, tel, lvl);
             Menu vistaMenu = new Menu();
             vistaMenu.setVisible(true);
             dispose();

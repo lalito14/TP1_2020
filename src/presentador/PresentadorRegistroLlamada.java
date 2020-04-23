@@ -31,7 +31,7 @@ public class PresentadorRegistroLlamada {
         this.persin = new PersistenciaSintomas();
     }
     
-    public void agregarPesonas(int dni, String nya, String domicilio, int telefono, int lvl, int cantsint, String recurso){
+    public void agregarPersonas(int dni, String nya, String domicilio, int telefono, int lvl, int cantsint, String recurso){
         try{
             cantsint = persin.cantidadSintomas();
             recurso = null;
@@ -72,6 +72,8 @@ public class PresentadorRegistroLlamada {
     public void mostrarSintomas(int lvl){
         vista.mostrarSintomas(persin.getSintomas(), lvl);
     }
+
+    
     
     
 }
