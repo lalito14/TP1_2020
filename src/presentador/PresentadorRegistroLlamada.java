@@ -24,18 +24,15 @@ public class PresentadorRegistroLlamada {
     private PersistenciaSintomas persin;
     private PersistenciaRecursos perrec;
     
-    
     public PresentadorRegistroLlamada(IRegistroLlamada vista){
         this.vista = vista;
         this.perper = PersistenciaPersonas.obtenerPersistencia();
         this.persin = new PersistenciaSintomas();
     }
     
-    public void agregarPesonas(int dni, String nya, String domicilio, int telefono, int lvl, int cantsint, String recurso){
+    public void agregarPesonas(int dni, String nya, String domicilio, int telefono, int lvl){
         try{
-            cantsint = persin.cantidadSintomas();
-            recurso = null;
-            Persona np = new Persona(dni, nya, telefono, domicilio, lvl, cantsint, recurso);
+            Persona np = new Persona(dni, nya, domicilio, telefono, lvl);
             this.perper.agregarPersona(np);
             vista.notificarPersonaAgregada();
         }catch(Exception e){
