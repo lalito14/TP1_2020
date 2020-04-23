@@ -15,9 +15,22 @@ import modelo.*;
 public class PersistenciaRecursos {
     private ArrayList<Recurso> recursos; //almacena recursos en memoria en tiempo de ejecucion
 
+    private static PersistenciaRecursos persistencia = new PersistenciaRecursos();
+    
     public PersistenciaRecursos(){
       recursos = new ArrayList<>();
-      
+    }
+    
+    public static PersistenciaRecursos obtenerPersistencia(){
+        return persistencia;
+    }
+
+    public void agregarRecurso(Recurso nuevo) {
+        this.recursos.add(nuevo);
+    }
+
+    public ArrayList<Recurso> getRecurso() {
+        return this.recursos;
     }
     
 
