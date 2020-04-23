@@ -31,6 +31,13 @@ public class Listado extends javax.swing.JFrame implements IListado{
         this.setTitle("Listado");
         this.presentador.mostrarDatosPersonas();
         this.setVisible(true);
+        this.txtCantSintomas.setEditable(false);
+        this.txtTelefono.setEditable(false);
+        this.txtCantSintomas.setEditable(false);
+        this.txtNivel.setEditable(false);
+        this.txtNya.setEditable(false);
+        this.txtDni.setEditable(false);
+        this.jTextArea1.setEditable(false);
         }
 
     /**
