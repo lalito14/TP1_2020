@@ -13,14 +13,6 @@ public class Turno extends Recurso{
     private String fechaHora;
     private int telefono;
 
-    public Turno(){
-        
-    }
-    public Turno(String fechaHora, int telefono) {
-        this.fechaHora = fechaHora;
-        this.telefono = telefono;
-    }
-
     public String getFechaHora() {
         return fechaHora;
     }

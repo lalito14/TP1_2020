@@ -11,16 +11,7 @@ package modelo;
  */
 public class Medico extends Recurso{
     private String nombre;
-    private String interno;
-    
-    public Medico(){
-        
-    }
-    
-    public Medico(String nombre, String interno){
-        this.nombre = nombre;
-        this.interno = interno;
-    }
+    private int interno;
     
     public void setNombre(String nombre){
         this.nombre = nombre;
@@ -30,15 +21,15 @@ public class Medico extends Recurso{
         return this.nombre;
     }
     
-    public void setInterno(String interno){
+    public void setInterno(int interno){
         this.interno = interno;
     }
     
-    public String getInterno(){
+    public int getInterno(){
         return this.interno;
     }
 
-    public Medico(String nombre, String interno, Estados estado) {
+    public Medico(String nombre, int interno, Estados estado) {
         super(estado);
         this.nombre = nombre;
         this.interno = interno;

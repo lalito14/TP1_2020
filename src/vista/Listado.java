@@ -243,6 +243,7 @@ public class Listado extends javax.swing.JFrame implements IListado{
         this.txtTelefono.setText(this.tablaPersonas.getValueAt(row, 2).toString());
         this.txtNivel.setText(this.tablaPersonas.getValueAt(row, 3).toString());        
         this.txtCantSintomas.setText(this.tablaPersonas.getValueAt(row, 4).toString());
+        
         this.jTextArea1.setText("");
         
     }//GEN-LAST:event_tablaPersonasMouseClicked

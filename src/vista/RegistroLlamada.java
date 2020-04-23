@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Persona;
 import modelo.Sintoma;
+import modelo.Recurso;
 import vista.Menu;
 import presentador.IRegistroLlamada;
 import presentador.PresentadorRegistroLlamada;
@@ -291,7 +292,7 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             int tel = Integer.parseInt(this.txtTelefono.getText());
             int lvl = Integer.parseInt(this.labelGravedad.getText());
             int cantsint = 0;
-            String recurso = null;
+            Recurso recurso = null;
             this.presentador.agregarPersonas(dni, nya, dom, tel, lvl,cantsint, recurso);
             Menu vistaMenu = new Menu();
             vistaMenu.setVisible(true);

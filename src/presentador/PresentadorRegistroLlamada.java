@@ -6,10 +6,10 @@
 package presentador;
 
 import java.util.ArrayList;
-import modelo.Persona;
+import modelo.*;
 import datos.*;
 import javax.swing.JOptionPane;
-import modelo.Sintoma;
+import static modelo.Estados.*;
 
 /**
  *
@@ -30,25 +30,52 @@ public class PresentadorRegistroLlamada {
         this.perrec = PersistenciaRecursos.obtenerPersistencia();
     }
     
-    public void agregarPersonas(int dni, String nya, String domicilio, int telefono, int lvl, int cantsint, String recurso){
-        
+    public void agregarPersonas(int dni, String nya, String domicilio, int telefono, int lvl, int cantsint, Recurso recurso){   
         try{
+            int bandera = 0;
             cantsint = persin.cantidadSintomas();
-            Persona np = new Persona(dni, nya, telefono, domicilio, lvl, cantsint, recurso);
             switch(lvl){
                 case 1:
-                    for(Turno t : Turno){
-                        
+                    for(Turno t : perrec.getTurno()){
+                        if(t.getEstado().equals(activo)){
+                            recurso = t;
+                            recurso.setEstado(inactivo);
+                            bandera = 1;
+                            break;
+                        }
                     }
                     break;
-                case 2: 
+                case 2:
+                    for(Medico m : perrec.getMedico()){
+                        if(m.getEstado().equals(activo)){
+                            recurso = m;
+                            recurso.setEstado(inactivo);
+                            bandera = 1;
+                            break;
+                        }
+                    }
                     break;
                 case 3:
+                    for(Ambulancia a : perrec.getAmbulancia()){
+                        if(a.getEstado().equals(activo)){
+                            recurso = a;
+                            recurso.setEstado(inactivo);
+                            bandera = 1;
+                            break;
+                        }
+                    }
                     break;
             }
-            this.perper.agregarPersona(np);
-            vista.notificarPersonaAgregada();
-        }catch(Exception e){
+            if(bandera == 1){
+                Persona np = new Persona(dni, nya, telefono, domicilio, lvl, cantsint, recurso);
+                this.perper.agregarPersona(np);
+                vista.notificarPersonaAgregada();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "No hay recursos disponibles");
+            }
+        }
+        catch(Exception e){
             JOptionPane.showMessageDialog(null, "Por favor, llene los campos correctamente");
         }
         

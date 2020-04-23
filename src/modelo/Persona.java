@@ -16,12 +16,12 @@ public class Persona {
     private String domicilio;
     private int lvl;
     private int cantsint;
-    private String recurso;
+    private Recurso recurso;
     
     public Persona() {
     }
 
-    public Persona(int dni, String nya, int telefono, String domicilio, int lvl, int cantsint, String recurso) {
+    public Persona(int dni, String nya, int telefono, String domicilio, int lvl, int cantsint, Recurso recurso) {
         this.dni = dni;
         this.nya = nya;
         this.telefono = telefono;
@@ -39,11 +39,11 @@ public class Persona {
         this.cantsint = cantsint;
     }
 
-    public String getRecurso() {
+    public Recurso getRecurso() {
         return recurso;
     }
 
-    public void setRecurso(String recurso) {
+    public void setRecurso(Recurso recurso) {
         this.recurso = recurso;
     }
 
