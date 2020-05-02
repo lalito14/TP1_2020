@@ -84,7 +84,10 @@ public class PresentadorRegistroLlamada {
                 llamada.setCantSintomas(cant);
                 llamada.setId(perlla.getLlamada().size() + 1);
                 perlla.agregarLlamada(llamada);
-                }            
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No existen recursos disponibles");
+                }
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "No existen recursos disponibles");
