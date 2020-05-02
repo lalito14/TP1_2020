@@ -27,7 +27,7 @@ public class Ambulancia extends Recurso{
     @Override
     public String mostrarDatos() {
         super.mostrarDatos();
-        return "Numero de ambulancia: " + this.getId();
+        return "Ambulancia\n" + "\nNumero de ambulancia: " + this.getId();
     }
     
     

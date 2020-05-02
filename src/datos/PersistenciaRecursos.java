@@ -34,9 +34,9 @@ public class PersistenciaRecursos {
       this.agregarMedico(m2);
       
       Turno = new ArrayList<>();
-      Turno t1 = new Turno("24/4 18:00", 386537040, activo);
-      Turno t2 = new Turno("24/4 19:00", 386537040, activo);
-      Turno t3 = new Turno("24/4 20:00", 386537040, activo);
+      Turno t1 = new Turno("04/05/2020 18:00", 386537040, activo);
+      Turno t2 = new Turno("04/05/2020 19:00", 386537040, activo);
+      Turno t3 = new Turno("04/05/2020 20:00", 386537040, activo);
       this.agregarTurno(t1);
       this.agregarTurno(t2);
       this.agregarTurno(t3);

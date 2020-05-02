@@ -38,7 +38,7 @@ public class Medico extends Recurso{
     @Override
     public String mostrarDatos() {
         super.mostrarDatos();
-        return "Nombre del medico: " + this.getNombre() + "\n\n" + "Num Interno: " + this.getInterno();
+        return "Medico\n" + "\nNombre del medico: " + this.getNombre() + "\n" + "Num Interno: " + this.getInterno();
     }
     
     
