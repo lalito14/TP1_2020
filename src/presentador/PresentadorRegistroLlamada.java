@@ -73,15 +73,18 @@ public class PresentadorRegistroLlamada {
                 }
                 break;   
             }
-            Persona per = new Persona(dni, nya, dom, tel);
-            Nivel niv = llamada.obtenerNivel();
-            llamada.setFechaHora("2/5/2020 12:55");
-            llamada.setRecurso(recurso);
-            llamada.setPersona(per);
-            llamada.setNivel(niv);
-            llamada.setCantSintomas(cant);
-            llamada.setId(perlla.getLlamada().size() + 1);
-            perlla.agregarLlamada(llamada);
+                if (bandera == 1)
+                {
+                Persona per = new Persona(dni, nya, dom, tel);
+                Nivel niv = llamada.obtenerNivel();
+                llamada.setFechaHora("2/5/2020 12:55");
+                llamada.setRecurso(recurso);
+                llamada.setPersona(per);
+                llamada.setNivel(niv);
+                llamada.setCantSintomas(cant);
+                llamada.setId(perlla.getLlamada().size() + 1);
+                perlla.agregarLlamada(llamada);
+                }            
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "No existen recursos disponibles");
