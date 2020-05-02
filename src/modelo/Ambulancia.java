@@ -23,6 +23,12 @@ public class Ambulancia extends Recurso{
         super(estado);
         this.id = id;
     }
+
+    @Override
+    public String mostrarDatos() {
+        super.mostrarDatos();
+        return "Numero de ambulancia: " + this.getId();
+    }
     
     
 }

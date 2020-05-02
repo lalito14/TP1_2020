@@ -1,18 +1,29 @@
 package presentador;
 
-import datos.PersistenciaPersonas;
+import datos.PersistenciaLlamada;
+import modelo.Llamada;
 import vista.Listado;
 
 public class PresentadorListado {
     
     private IListado vista;
-    private PersistenciaPersonas persistencia;
+    private PersistenciaLlamada perlla;
     public PresentadorListado(IListado vista){
         this.vista = vista;
-        this.persistencia = PersistenciaPersonas.obtenerPersistencia();
+        this.perlla = PersistenciaLlamada.obtenerPersistencia();
     }
-   
+    
+    public String recurso(String id){
+        int ID = Integer.parseInt(id);
+        for(Llamada l : perlla.getLlamada()){
+            if(l.getId()== ID){
+                return l.getRecurso().mostrarDatos();
+            }
+        }
+        return null;
+    }
+    
     public void mostrarDatosPersonas(){
-    vista.mostrarDatosPersonas(persistencia.getPersonas());
+    vista.mostrarDatosLlamada(perlla.getLlamada());
     }
 }

@@ -6,6 +6,7 @@
 package presentador;
 
 import java.util.ArrayList;
+import modelo.Llamada;
 import modelo.Sintoma;
 
 /**
@@ -16,6 +17,7 @@ public interface IRegistroLlamada {
     public void agregarPersona();
     public void notificarPersonaAgregada();
     public void notificarError(Exception e);
-    public void mostrarSintomas(ArrayList<Sintoma> sintoma, int lvl);
+    public void mostrarSintomas(ArrayList<Sintoma> sintoma, Sintoma sin);
     public void agregarSintoma();
+    public void cargarSintomas(ArrayList<Sintoma> sintoma);
 }

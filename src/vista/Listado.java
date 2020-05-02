@@ -7,8 +7,8 @@ package vista;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import modelo.Persona;
-import modelo.Sintoma;
+import modelo.*;
+import datos.*;
 import vista.Menu;
 import presentador.IListado;
 import presentador.PresentadorListado;
@@ -37,7 +37,7 @@ public class Listado extends javax.swing.JFrame implements IListado{
         this.txtNivel.setEditable(false);
         this.txtNya.setEditable(false);
         this.txtDni.setEditable(false);
-        this.jTextArea1.setEditable(false);
+        this.txtRecurso.setEditable(false);
         }
 
     /**
@@ -65,7 +65,7 @@ public class Listado extends javax.swing.JFrame implements IListado{
         txtCantSintomas = new javax.swing.JTextField();
         txtNivel = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtRecurso = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,10 +137,16 @@ public class Listado extends javax.swing.JFrame implements IListado{
 
         jLabel13.setText("Cant Sintomas:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Datos necesarios\nTurno: Fecha/Hora\nMedico: nombre e interno\nAmbulancia: ID");
-        jScrollPane2.setViewportView(jTextArea1);
+        txtNya.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNyaActionPerformed(evt);
+            }
+        });
+
+        txtRecurso.setColumns(20);
+        txtRecurso.setRows(5);
+        txtRecurso.setText("Datos necesarios\nTurno: Fecha/Hora\nMedico: nombre e interno\nAmbulancia: ID");
+        jScrollPane2.setViewportView(txtRecurso);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,7 +163,7 @@ public class Listado extends javax.swing.JFrame implements IListado{
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,21 +178,20 @@ public class Listado extends javax.swing.JFrame implements IListado{
                                         .addGap(41, 41, 41)
                                         .addComponent(jLabel10))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel13)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(txtCantSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(txtNya, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtNya, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2)))
                         .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -215,12 +220,11 @@ public class Listado extends javax.swing.JFrame implements IListado{
                             .addComponent(jLabel8)
                             .addComponent(txtNivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)
-                            .addComponent(txtCantSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                .addGap(14, 14, 14)
+                            .addComponent(txtCantSintomas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,15 +242,19 @@ public class Listado extends javax.swing.JFrame implements IListado{
 
     private void tablaPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPersonasMouseClicked
         int row = this.tablaPersonas.getSelectedRow();
-        this.txtDni.setText(this.tablaPersonas.getValueAt(row, 0).toString());        
-        this.txtNya.setText(this.tablaPersonas.getValueAt(row, 1).toString());
-        this.txtTelefono.setText(this.tablaPersonas.getValueAt(row, 2).toString());
-        this.txtNivel.setText(this.tablaPersonas.getValueAt(row, 3).toString());        
-        this.txtCantSintomas.setText(this.tablaPersonas.getValueAt(row, 4).toString());
+        this.txtDni.setText(this.tablaPersonas.getValueAt(row, 2).toString());        
+        this.txtNya.setText(this.tablaPersonas.getValueAt(row, 3).toString());
+        this.txtTelefono.setText(this.tablaPersonas.getValueAt(row, 5).toString());
+        this.txtNivel.setText(this.tablaPersonas.getValueAt(row, 6).toString());        
+        this.txtCantSintomas.setText(this.tablaPersonas.getValueAt(row, 7).toString());        
         
-        this.jTextArea1.setText("");
+        this.txtRecurso.setText(presentador.recurso(this.tablaPersonas.getValueAt(row, 0).toString()));
         
     }//GEN-LAST:event_tablaPersonasMouseClicked
+
+    private void txtNyaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNyaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNyaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,17 +302,17 @@ public class Listado extends javax.swing.JFrame implements IListado{
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTable tablaPersonas;
     private javax.swing.JTextField txtCantSintomas;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNivel;
     private javax.swing.JTextField txtNya;
+    private javax.swing.JTextArea txtRecurso;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void mostrarDatosPersonas(ArrayList<Persona> personas) {
+    public void mostrarDatosLlamada(ArrayList<Llamada> llamada) {
         DefaultTableModel modelo = new DefaultTableModel()
                 { 
             @Override
@@ -315,30 +323,28 @@ public class Listado extends javax.swing.JFrame implements IListado{
                 else{
                     return false;
                 }
-                 
-            }
-            
+            }           
         };
-        
         /*Definimos las columnas*/
+        modelo.addColumn("ID");
+        modelo.addColumn("Fecha y Hora");
         modelo.addColumn("DNI");
-        modelo.addColumn("Apellido y Nombre");
-        modelo.addColumn("Domicilio");
+        modelo.addColumn("Nombre y Apellido");
+        modelo.addColumn("Domicilo");
         modelo.addColumn("Telefono");
         modelo.addColumn("Nivel");
         modelo.addColumn("Cant. Sintomas");
-        modelo.addColumn("Recurso");
         /*Definimos las filas*/
-        for(Persona p : personas){
+        for(Llamada ll : llamada){
             Object fila[]={
-              p.getDni(),
-              p.getNya(),
-              p.getDomicilio(),
-              p.getTelefono(),
-              p.getLvl(),
-              p.getCantsint(),
-              p.getRecurso()
-              
+                ll.getId(),
+                ll.getFechaHora(),
+                ll.getPersona().getDni(),
+                ll.getPersona().getNya(),
+                ll.getPersona().getDomicilio(),
+                ll.getPersona().getTelefono(),
+                ll.getNivel().getNivel(),
+                ll.getCantSintomas()
             };
             modelo.addRow(fila);
         };

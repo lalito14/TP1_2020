@@ -28,5 +28,8 @@ public abstract class Recurso {
         this.estado = estado;
     }
     
-   
+    public String mostrarDatos(){
+        return null;
+    }
+    
 }

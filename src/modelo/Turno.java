@@ -34,6 +34,13 @@ public class Turno extends Recurso{
         this.fechaHora = fechaHora;
         this.telefono = telefono;
     }
+
+    @Override
+    public String mostrarDatos() {
+        super.mostrarDatos();
+        return "Fecha del turno: " + this.getFechaHora() + "\n" + "Num de telefono: " + this.getTelefono();
+    }
+    
     
     
 }

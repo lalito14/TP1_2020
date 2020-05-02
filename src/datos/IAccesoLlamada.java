@@ -6,13 +6,13 @@
 package datos;
 
 import java.util.ArrayList;
-import modelo.Persona;
+import modelo.Llamada;
 
 /**
  *
- * @author Eduardo
+ * @author Ian Lehmann
  */
-public interface IAccesoPersonas {
-    public void agregarPersona(Persona nuevo);
-    public ArrayList<Persona> getPersonas();
+public interface IAccesoLlamada {
+    public void agregarLlamada(Llamada nuevo);
+    public ArrayList<Llamada> getLlamada();
 }

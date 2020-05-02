@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package principal;
-import datos.PersistenciaSintomas;
-import modelo.Sintoma;
 import vista.Menu;
 
 /**

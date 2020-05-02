@@ -18,95 +18,90 @@ import static modelo.Estados.*;
 public class PresentadorRegistroLlamada {
     
     private IRegistroLlamada vista;
-    private PersistenciaPersonas perper;
-    private PersistenciaSintomas persin;
+    private PersistenciaLlamada perlla;
+    private PersistenciaSintoma persin;
     private PersistenciaRecursos perrec;
+    private Llamada llamada;
     
     
     public PresentadorRegistroLlamada(IRegistroLlamada vista){
         this.vista = vista;
-        this.perper = PersistenciaPersonas.obtenerPersistencia();
-        this.persin = new PersistenciaSintomas();
+        this.perlla = PersistenciaLlamada.obtenerPersistencia();
+        this.persin = PersistenciaSintoma.obtenerPersistencia();
         this.perrec = PersistenciaRecursos.obtenerPersistencia();
+        this.llamada = new Llamada();
     }
     
-    public void agregarPersonas(int dni, String nya, String domicilio, int telefono, int lvl, int cantsint, Recurso recurso){   
+    public void cargarSintomas(){
+        vista.cargarSintomas(persin.getSintoma());
+    }
+    
+    public void agregarLlamada(int dni, String nya, String dom, int tel, int nv){   
+        Recurso recurso = null;
+        int bandera = 0;
+        int cant = llamada.cantidadSintomas();
         try{
-            int bandera = 0;
-            cantsint = persin.cantidadSintomas();
-            switch(lvl){
-                case 1:
-                    for(Turno t : perrec.getTurno()){
-                        if(t.getEstado().equals(activo)){
-                            recurso = t;
-                            recurso.setEstado(inactivo);
-                            bandera = 1;
-                            break;
-                        }
+            switch(nv){
+            case 1:
+                for(Turno t : perrec.getTurno()){
+                    if(t.getEstado().equals(activo)){
+                        recurso = t;
+                        recurso.setEstado(inactivo);
+                        bandera = 1;
+                        break;
                     }
-                    break;
-                case 2:
-                    for(Medico m : perrec.getMedico()){
-                        if(m.getEstado().equals(activo)){
-                            recurso = m;
-                            recurso.setEstado(inactivo);
-                            bandera = 1;
-                            break;
-                        }
+                }
+                break;
+            case 2:
+                for(Medico m : perrec.getMedico()){
+                    if(m.getEstado().equals(activo)){
+                        recurso = m;
+                        recurso.setEstado(inactivo);
+                        bandera = 1;
+                        break;
                     }
-                    break;
-                case 3:
-                    for(Ambulancia a : perrec.getAmbulancia()){
-                        if(a.getEstado().equals(activo)){
-                            recurso = a;
-                            recurso.setEstado(inactivo);
-                            bandera = 1;
-                            break;
-                        }
+                }
+                break;
+            case 3:
+                for(Ambulancia a : perrec.getAmbulancia()){
+                    if(a.getEstado().equals(activo)){
+                        recurso = a;
+                        recurso.setEstado(inactivo);
+                        bandera = 1;
+                        break;
                     }
-                    break;
+                }
+                break;   
             }
-            if(bandera == 1){
-                Persona np = new Persona(dni, nya, telefono, domicilio, lvl, cantsint, recurso);
-                this.perper.agregarPersona(np);
-                vista.notificarPersonaAgregada();
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "No hay recursos disponibles");
-            }
+            Persona per = new Persona(dni, nya, dom, tel);
+            Nivel niv = llamada.obtenerNivel();
+            llamada.setFechaHora("2/5/2020 12:55");
+            llamada.setRecurso(recurso);
+            llamada.setPersona(per);
+            llamada.setNivel(niv);
+            llamada.setCantSintomas(cant);
+            llamada.setId(perlla.getLlamada().size() + 1);
+            perlla.agregarLlamada(llamada);
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Por favor, llene los campos correctamente");
+            JOptionPane.showMessageDialog(null, "No existen recursos disponibles");
         }
-        
     }
     
-    public void agregarSintoma(String sin){
-        int lvl = 0;
+    public void agregarSintoma(String sintoma){
+        Sintoma sin = persin.buscarSintoma(sintoma);
         try{
-            Sintoma s = new Sintoma(sin);
-            
-            if(s.getDescripcion() == "Dificultad para respirar"){
-                lvl = 3;
-            }
-            else if(s.getDescripcion() == "Fiebre" || s.getDescripcion() == "Nauseas o vomitos" ||
-                    s.getDescripcion() == "Dolor de cabeza" || s.getDescripcion() == "Escalofrios"){
-                lvl = 2;
-            }
-            else{
-                lvl = 1;
-            }
-            this.persin.agregarSintoma(s);
+            llamada.asignarSintoma(sin);
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Por favor, agrege uno o varios sintomas");
         }
         finally{
-            this.mostrarSintomas(lvl);
+            this.mostrarSintomas(sin);
         }
     }
     
-    public void mostrarSintomas(int lvl){
-        vista.mostrarSintomas(persin.getSintomas(), lvl);
+    public void mostrarSintomas(Sintoma sin){
+        vista.mostrarSintomas(llamada.getSintomas(), sin);
     }
 }

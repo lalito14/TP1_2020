@@ -11,12 +11,11 @@ package modelo;
  */
 public class Sintoma {
     private String descripcion;
+    private Nivel nivel;
     
-    public Sintoma(){
-        
-    }
-    public Sintoma(String descripcion){
+    public Sintoma(String descripcion, Nivel nivel){
         this.descripcion = descripcion;
+        this.nivel = nivel;
     }
     public void setDescripcion(String descripcion){
         this.descripcion = descripcion;
@@ -25,4 +24,15 @@ public class Sintoma {
     public String getDescripcion(){
         return descripcion;
     }
+
+    public Nivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Nivel nivel) {
+        this.nivel = nivel;
+    }
+    
+    
+    
 }

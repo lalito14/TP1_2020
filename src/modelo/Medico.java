@@ -34,6 +34,13 @@ public class Medico extends Recurso{
         this.nombre = nombre;
         this.interno = interno;
     }
+
+    @Override
+    public String mostrarDatos() {
+        super.mostrarDatos();
+        return "Nombre del medico: " + this.getNombre() + "\n\n" + "Num Interno: " + this.getInterno();
+    }
+    
     
     
 }

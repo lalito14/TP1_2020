@@ -6,7 +6,7 @@
 package presentador;
 
 import java.util.ArrayList;
-import modelo.Persona;
+import modelo.Llamada;
 import modelo.Sintoma;
 
 /**
@@ -14,7 +14,7 @@ import modelo.Sintoma;
  * @author Eduardo
  */
 public interface IListado {
-    public void mostrarDatosPersonas(ArrayList<Persona> personas);
+    public void mostrarDatosLlamada(ArrayList<Llamada> llamada);
     public void listarSintomas(ArrayList<Sintoma> sintomas);
 
     

@@ -7,8 +7,10 @@ package vista;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Llamada;
 import modelo.Persona;
 import modelo.Sintoma;
 import modelo.Recurso;
@@ -32,18 +34,8 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
         this.presentador = new PresentadorRegistroLlamada(this);
         this.setLocationRelativeTo(null);
         this.setTitle("Registro de Llamadas");
-        this.boxSintoma.addItem("Fiebre");
-        this.boxSintoma.addItem("Tos seca");
-        this.boxSintoma.addItem("Fatiga");
-        this.boxSintoma.addItem("Dolor muscular o articulaciones");
-        this.boxSintoma.addItem("Dolor de garganta");
-        this.boxSintoma.addItem("Dolor de cabeza");
-        this.boxSintoma.addItem("Escalofrios");
-        this.boxSintoma.addItem("Nauseas o vomitos");
-        this.boxSintoma.addItem("Congestion nasal");
-        this.boxSintoma.addItem("Dificultad para respirar");        
+        presentador.cargarSintomas();
         this.labelGravedad.setText("0");
-        this.presentador.mostrarSintomas(0);
         this.setVisible(true);
         
     }
@@ -293,7 +285,7 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
             int lvl = Integer.parseInt(this.labelGravedad.getText());
             int cantsint = 0;
             Recurso recurso = null;
-            this.presentador.agregarPersonas(dni, nya, dom, tel, lvl,cantsint, recurso);
+            this.presentador.agregarLlamada(dni, nya, dom, tel, lvl);
             Menu vistaMenu = new Menu();
             vistaMenu.setVisible(true);
             dispose();
@@ -395,30 +387,35 @@ public class RegistroLlamada extends javax.swing.JFrame implements IRegistroLlam
     }
     
     @Override
-    public void mostrarSintomas(ArrayList<Sintoma> sintoma, int lvl){
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID");
-        modelo.addColumn("Sintoma");
-        int i = Integer.parseInt(this.labelGravedad.getText());
-        int id = 1;
-        if (i <= lvl){
-            this.labelGravedad.setText(Integer.toString(lvl));
-        }
-        for(Sintoma s : sintoma){
-            Object fila[]={
-                id ++,
-                s.getDescripcion()
-            };
-            modelo.addRow(fila);
-        };
-        this.tablaSintomas.setModel(modelo);
-    }
-    
-    @Override
     public void agregarSintoma(){
         String sin = this.boxSintoma.getSelectedItem().toString();
         presentador.agregarSintoma(sin);
     }
-    
+
+    @Override
+    public void cargarSintomas(ArrayList<Sintoma> sintoma) {
+        for(Sintoma s : sintoma){
+            this.boxSintoma.addItem(s.getDescripcion());
+        }
+    }
+
+    @Override
+    public void mostrarSintomas(ArrayList<Sintoma> sintomas, Sintoma sin) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nivel");
+        modelo.addColumn("Sintoma");
+        int i = Integer.parseInt(this.labelGravedad.getText());
+        if (i <= sin.getNivel().getNivel()){
+            this.labelGravedad.setText(Integer.toString(sin.getNivel().getNivel()));
+        }
+        for(Sintoma s : sintomas){
+            Object fila[]={
+                s.getNivel().getNivel(),
+                s.getDescripcion()
+            };
+            modelo.addRow(fila);
+        }
+        this.tablaSintomas.setModel(modelo);
+    }
     
 }
